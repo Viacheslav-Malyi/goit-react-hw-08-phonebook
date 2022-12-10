@@ -1,30 +1,53 @@
-import css from '../../components/phonebook.module.css';
+import { Item, ItemBox, ContactsBtn } from './ContactItem.styled';
+import { Text, Button } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
 
-export const ContactItem = ({ contact }) => {
-  console.log(contact);
-  const dispatch = useDispatch();
-
-  const handleDelete = () => dispatch(deleteContact(contact.id));
+const ContactItem = ({
+  name,
+  number,
+  handleDeleteContact,
+  contactChange,
+  id,
+}) => {
   return (
-    <li className={css.contact__item}>
-      <span className={css.contact__name}>{contact.name}: </span>
-      <a className={css.contact__phone} href={`tel:${contact.phone}`}>
-        {contact.phone}
-      </a>
-      <button
-        className={css.delete__button}
-        type="button"
-        onClick={handleDelete}
-      >
-        Delete
-      </button>
-    </li>
+    <Item>
+      <ItemBox>
+        <Text as="em" color="black.200" fontSize="xl">
+          {name} :
+        </Text>
+        <Text fontSize="lg" color="black" ml="5px">
+          {number}
+        </Text>
+        <Button
+          colorScheme="red"
+          ml="5px"
+          type="button"
+          onClick={() => {
+            handleDeleteContact(id);
+          }}
+        >
+          Delete
+        </Button>
+        <ContactsBtn
+          colorScheme="orange"
+          ml="5px"
+          type="button"
+          onClick={() => {
+            contactChange(id);
+          }}
+        >
+          Change
+        </ContactsBtn>
+      </ItemBox>
+    </Item>
   );
 };
 
+export default ContactItem;
 ContactItem.propTypes = {
-  contact: PropTypes.object,
+  name: PropTypes.string,
+  number: PropTypes.string,
+  handleDeleteContact: PropTypes.func,
+  contactChange: PropTypes.func,
+  id: PropTypes.string,
 };

@@ -1,26 +1,33 @@
-import css from '../../components/phonebook.module.css';
-
 import { useDispatch } from 'react-redux';
-import { filterContact } from 'redux/filterSlice';
+import { setFilter } from 'redux/store/contactsSlice';
+import { FormControl, Text, Input, Box, Container } from '@chakra-ui/react';
 
-export const Filter = () => {
+export default function Filter() {
   const dispatch = useDispatch();
-
-  const handleChange = e => {
-    dispatch(filterContact(e.target.value));
-  };
   return (
-    <label className={css.filter__container}>
-      <p className={css.input__description}>Find contacts by name</p>
-      <input
-        className={css.filter__input}
-        type="text"
-        name="filter"
-        onChange={handleChange}
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-        required
-      />
-    </label>
+    <>
+      <Box as="section" pt="10px">
+        <Container
+          maxW="container.lg"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <FormControl color="black">
+            <Text textAlign="center" fontSize="xl">
+              Find contacts by name
+            </Text>
+            <Input
+              mt="10px"
+              type="text"
+              onChange={e => {
+                dispatch(setFilter({ text: e.target.value }));
+              }}
+            />
+          </FormControl>
+        </Container>
+      </Box>
+    </>
   );
-};
+}

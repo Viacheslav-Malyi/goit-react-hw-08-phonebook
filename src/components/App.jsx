@@ -1,31 +1,44 @@
-import { useEffect } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { useEffect, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/operations';
-import { selectError, selectIsLoading } from 'redux/selectors';
-import { ContactList } from './ContactList/ContactList';
-import { Container } from './Container/Container';
-import { Filter } from './Filter/Filter';
-import { FormContact } from './FormContact/FormContact';
-import { Title } from './Title/Title';
+import Layout from './Layout/Layout';
+import authOperations from '../redux/store/auth-operations';
+import Home from './Home/Home';
 
-export const App = () => {
+const Contacts = lazy(() => import('./Contacts/Contacts'));
+const RegisterForm = lazy(() => import('./RegisterForm/RegisterForm'));
+const LoginForm = lazy(() => import('./LoginForm/LoginForm'));
+
+const App = () => {
+  const isLoggIn = useSelector(state => state.user.isLoggedIn);
+  const refreshUser = useSelector(state => state.user.isRefreshing);
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(authOperations.getCurrentUser());
   }, [dispatch]);
 
   return (
-    <Container>
-      <Title title={'Phonebook'} />
-      <FormContact />
-      <Filter />
-      <Title title={'Contacts'} />
-
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ContactList />
-    </Container>
+    !refreshUser && (
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/contacts"
+            element={isLoggIn ? <Contacts /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="register"
+            element={isLoggIn ? <Navigate to="/contacts" /> : <RegisterForm />}
+          />
+          <Route
+            path="login"
+            element={isLoggIn ? <Navigate to="/contacts" /> : <LoginForm />}
+          />
+        </Route>
+      </Routes>
+    )
   );
 };
+
+export default App;

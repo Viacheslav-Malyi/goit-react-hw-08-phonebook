@@ -109,7 +109,7 @@ const RegisterForm = () => {
                 onChange={handleUserChange}
               ></Input>
             </FormControl>
-            <FormControl color="blck" mt="10px">
+            <FormControl color="black" mt="10px">
               <FormLabel>Password</FormLabel>
               <InputGroup size="md">
                 <Input

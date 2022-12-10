@@ -64,9 +64,10 @@ const LoginForm = () => {
     <Box as="main">
       <Container maxW="container.lg">
         <Form onSubmit={handleSubmit}>
-          <FormControl color="white" mt="10px">
+          <FormControl color="black" mt="10px">
             <FormLabel>Email</FormLabel>
             <Input
+              borderColor="black"
               placeholder="enter your email"
               _placeholder={{
                 opacity: 0.7,
@@ -79,19 +80,20 @@ const LoginForm = () => {
               onChange={handleUserChange}
             ></Input>
           </FormControl>
-          <FormControl color="white" mt="10px">
+          <FormControl color="black" mt="10px">
             <FormLabel>Password</FormLabel>
             <InputGroup size="md">
               <Input
+                borderColor="black"
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
                 placeholder="enter your password"
                 _placeholder={{
                   opacity: 0.7,
-                  color: 'white',
+                  color: 'black',
                   fontStyle: 'italic',
                 }}
-                color="white"
+                color="black"
                 name="password"
                 value={password}
                 onChange={handleUserChange}

@@ -77,13 +77,14 @@ const RegisterForm = () => {
       <Box as="main">
         <Container maxW="container.lg">
           <Form onSubmit={handleSubmit}>
-            <FormControl color="white">
+            <FormControl color="black">
               <FormLabel>Name</FormLabel>
               <Input
+                borderColor="black"
                 placeholder="enter your name"
                 _placeholder={{
                   opacity: 0.7,
-                  color: 'white',
+                  color: 'black',
                   fontStyle: 'italic',
                 }}
                 type="text"
@@ -92,13 +93,14 @@ const RegisterForm = () => {
                 onChange={handleUserChange}
               ></Input>
             </FormControl>
-            <FormControl color="white" mt="10px">
+            <FormControl color="black" mt="10px">
               <FormLabel>Email</FormLabel>
               <Input
+                borderColor="black"
                 placeholder="enter your email"
                 _placeholder={{
                   opacity: 0.7,
-                  color: 'white',
+                  color: 'black',
                   fontStyle: 'italic',
                 }}
                 type="email"
@@ -107,10 +109,11 @@ const RegisterForm = () => {
                 onChange={handleUserChange}
               ></Input>
             </FormControl>
-            <FormControl color="white" mt="10px">
+            <FormControl color="blck" mt="10px">
               <FormLabel>Password</FormLabel>
               <InputGroup size="md">
                 <Input
+                  borderColor="black"
                   pr="4.5rem"
                   type={show ? 'text' : 'password'}
                   placeholder="enter your password"

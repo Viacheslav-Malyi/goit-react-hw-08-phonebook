@@ -119,7 +119,7 @@ const RegisterForm = () => {
                   placeholder="enter your password"
                   _placeholder={{
                     opacity: 0.7,
-                    color: 'white',
+                    color: 'black',
                     fontStyle: 'italic',
                   }}
                   color="white"
